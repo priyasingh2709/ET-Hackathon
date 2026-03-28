@@ -13,6 +13,10 @@ Designed for UPSC aspirants and news enthusiasts, it provides curated briefings,
 - Anshuman Panda   (GitHub: [link](https://github.com/levi178u) )
 
 ---
+## DashBoard for UPSC Aspirants 
+![Dashboard](frontend/public/dashboard.png)
+
+---
 
 ## ⚖️ Features at a Glance
 - [x] **GS Paper Mapping**: Real-time categorization of news.
