@@ -7,6 +7,9 @@ import Feed from './pages/Feed';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import Chatbot from './pages/Chatbot';
+import Quiz from './pages/Quiz';
+import GenerateQuiz from './pages/GenerateQuiz';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/chatbot" element={<Chatbot />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/generate-quiz" element={<GenerateQuiz />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
