@@ -8,12 +8,6 @@
 News Navigator x Squirrel is a high-performance, personalized news experience designed for aspirants, professionals, and curious minds. It leverages state-of-the-art LLMs (Groq / Llama-3) to transform raw news into actionable intelligence for competitive exams like UPSC.
 Designed for UPSC aspirants and news enthusiasts, it provides curated briefings, AI-powered enrichment, to help users master current affairs.
 
----
-## Contributors :
-- Priya Singh   (GitHub: [link](https://github.com/priyasingh2709) )
-- Anshuman Panda   (GitHub: [link](https://github.com/levi178u) )
-
----
 ## DashBoard for UPSC Aspirants & Enthusiasts !
 ![Dashboard](frontend/public/dashboard.png)
 
@@ -129,6 +123,47 @@ graph TD
 6. Frontend updates using `refreshUser()` via `AuthContext`.
 
 ---
+## 🔄 Workflows
+
+### 1. UPSC Enrichment Flow
+```mermaid
+sequenceDiagram
+    participant User
+    participant Backend
+    participant Groq
+    participant DB
+
+    User->>Backend: Request Feed (Role: Student)
+    Backend->>DB: Fetch Raw News
+    loop For each article
+        Backend->>Groq: Generate UPSC Insights
+        Groq-->>Backend: GS Paper, Facts, Mains Prompt
+    end
+    Backend-->>User: Personalized UPSC Feed
+```
+
+### 2. Premium Subscription Verification
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant Stripe
+    participant DB
+
+    User->>Frontend: Clicks "Go Premium"
+    Frontend->>Stripe: Redirect to Checkout
+    User->>Stripe: Completes Payment
+    Stripe-->>Frontend: Redirect back with session_id
+    Frontend->>Backend: GET /verify-session?id=...
+    Backend->>Stripe: Finalize & Verify Session
+    Stripe-->>Backend: Session Confirmed
+    Backend->>DB: Update User.is_premium = true
+    Backend-->>Frontend: Success Response
+    Frontend->>Frontend: Refresh User State
+```
+
+---
 
 ## 🛠️ Tech Stack & Setup
 
@@ -198,45 +233,9 @@ ET-Hackathon/
 ```
 
 ---
-
-## 🔄 Workflows
-
-### 1. UPSC Enrichment Flow
-```mermaid
-sequenceDiagram
-    participant User
-    participant Backend
-    participant Groq
-    participant DB
-
-    User->>Backend: Request Feed (Role: Student)
-    Backend->>DB: Fetch Raw News
-    loop For each article
-        Backend->>Groq: Generate UPSC Insights
-        Groq-->>Backend: GS Paper, Facts, Mains Prompt
-    end
-    Backend-->>User: Personalized UPSC Feed
-```
-
-### 2. Premium Subscription Verification
-```mermaid
-sequenceDiagram
-    participant User
-    participant Frontend
-    participant Backend
-    participant Stripe
-    participant DB
-
-    User->>Frontend: Clicks "Go Premium"
-    Frontend->>Stripe: Redirect to Checkout
-    User->>Stripe: Completes Payment
-    Stripe-->>Frontend: Redirect back with session_id
-    Frontend->>Backend: GET /verify-session?id=...
-    Backend->>Stripe: Finalize & Verify Session
-    Stripe-->>Backend: Session Confirmed
-    Backend->>DB: Update User.is_premium = true
-    Backend-->>Frontend: Success Response
-    Frontend->>Frontend: Refresh User State
-```
+## Contributors :
+- Priya Singh   (GitHub: [link](https://github.com/priyasingh2709) )
+- Anshuman Panda   (GitHub: [link](https://github.com/levi178u) )
 
 ---
+
