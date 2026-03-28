@@ -1,4 +1,5 @@
-# 🐿️ News Navigator (Squirrel AI News)
+# 🐿️ News Navigator X Squirrel AI 
+## Hub for News, Quizzes, Current Affairs Competitive Exams prep and Much more......
 
 ![Squirrel](frontend/public/sq.png) x ![ET](frontend/public/et.jpg) x ![UPSC](frontend/public/upsc.png)
 ---
