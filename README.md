@@ -1,6 +1,6 @@
 # 🐿️ News Navigator (Squirrel AI News)
 
-![Squirrel](frontend/public/sq.png) X ![ET](frontend/public/et.jpg) X ![UPSC](frontend/public/upsc.png)
+![Squirrel](frontend/public/sq.png) x ![ET](frontend/public/et.jpg) x ![UPSC](frontend/public/upsc.png)
 ---
 ### The Ultimate AI-Powered UPSC News Enrichment Hub
 
