@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Zap, Headphones, Settings, FileText, ChevronRight, Loader2, Sparkles, Play, Square, Sun, Moon, BookOpen, GraduationCap, Trophy } from 'lucide-react';
 import SquirrelChat from '../components/SquirrelChat';
@@ -12,6 +13,15 @@ export default function Feed() {
   
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  const handleRetry = () => {
+    setLoading(true);
+    setFetchError(null);
+    setRefreshTrigger(prev => prev + 1);
+  };
+
   const [insights, setInsights] = useState({});
   const [insightLoading, setInsightLoading] = useState({});
   const [activeQuizArticle, setActiveQuizArticle] = useState(null);
@@ -82,11 +92,12 @@ export default function Feed() {
 
     const fetchDailyPulse = async () => {
       try {
+        setDailyPulse(prev => ({ ...prev, loading: true }));
         const [worldRes, historyRes, recentRes, quizRes] = await Promise.allSettled([
-          axios.get(`${API_BASE_URL}/api/news/current-affairs/international-today`),
-          axios.get(`${API_BASE_URL}/api/news/current-affairs/history-of-today`),
-          axios.get(`${API_BASE_URL}/api/news/current-affairs/recent`),
-          axios.get(`${API_BASE_URL}/api/news/current-affairs/today-quiz`)
+          axios.get(`${API_BASE_URL}/api/news/current-affairs/international-today`, { timeout: 50000 }),
+          axios.get(`${API_BASE_URL}/api/news/current-affairs/history-of-today`, { timeout: 50000 }),
+          axios.get(`${API_BASE_URL}/api/news/current-affairs/recent`, { timeout: 50000 }),
+          axios.get(`${API_BASE_URL}/api/news/current-affairs/today-quiz`, { timeout: 50000 })
         ]);
 
         setDailyPulse({
@@ -104,12 +115,13 @@ export default function Feed() {
 
     const fetchNews = async () => {
       try {
-        const { data } = await axios.get(`${API_BASE_URL}/api/news/fetch`);
+        const { data } = await axios.get(`${API_BASE_URL}/api/news/fetch`, { timeout: 50000 });
         if (data.status === 'success') {
           setArticles(data.articles);
         }
       } catch (error) {
         console.error('Failed to fetch news', error);
+        setFetchError("Failed to load news. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -117,7 +129,7 @@ export default function Feed() {
 
     fetchDailyPulse();
     fetchNews();
-  }, [API_BASE_URL]);
+  }, [API_BASE_URL, refreshTrigger]);
 
   const handleWhyMatters = async (article, index) => {
     if (insights[index]) return; 
@@ -169,6 +181,10 @@ export default function Feed() {
             <FileText size={16} /> <span>Quiz Mode</span>
           </button>
           
+          <Link to="/generate-quiz" className="flex items-center space-x-2 text-textMuted hover:text-textDefault transition-colors font-medium">
+            <Zap size={16} className="text-primary fill-primary" /> <span>Generate Quiz</span>
+          </Link>
+
           <button 
             onClick={toggleTheme}
             className="p-2 text-textMuted hover:text-textDefault hover:bg-surfaceHover rounded-full transition-all"
@@ -193,12 +209,12 @@ export default function Feed() {
             </button>
           )}
           
-          <div className="flex items-center space-x-2 text-textMuted">
-             <div className="w-8 h-8 rounded-full bg-surface-hover flex items-center justify-center font-bold text-xs border border-border">
+          <Link to="/dashboard" className="flex items-center space-x-2 text-textMuted group">
+             <div className="w-8 h-8 rounded-full bg-surface-hover flex items-center justify-center font-bold text-xs border border-border group-hover:border-primary/50 transition-colors">
                 {user?.name?.[0]?.toUpperCase() || 'U'}
              </div>
-             <Settings className="w-4 h-4 cursor-pointer hover:text-textDefault" />
-          </div>
+             <Settings className="w-4 h-4 cursor-pointer group-hover:text-textDefault transition-colors" />
+          </Link>
         </div>
       </nav>
 
@@ -260,9 +276,19 @@ export default function Feed() {
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
             <p>Curating your personalized news feed...</p>
           </div>
+        ) : fetchError ? (
+          <div className="text-center p-12 text-textMuted bg-surface border border-red-500/20 rounded-xl flex flex-col items-center">
+            <p className="mb-4 text-red-400">{fetchError}</p>
+            <button onClick={handleRetry} className="bg-primary text-white px-4 py-2 rounded-lg font-bold hover:bg-primaryHover transition-colors flex items-center space-x-2">
+              <Zap size={16} /> <span>Try Again</span>
+            </button>
+          </div>
         ) : articles.length === 0 ? (
           <div className="text-center p-12 text-textMuted bg-surface border border-border rounded-xl">
-            <p>No news found right now. Check back later!</p>
+            <p className="mb-4">No news found right now. Check back later!</p>
+            <button onClick={handleRetry} className="bg-primary text-white px-4 py-2 rounded-lg font-bold hover:bg-primaryHover transition-colors">
+              Refresh Feed
+            </button>
           </div>
         ) : articles.map((article, index) => (
           <article key={index} className="bg-surface border border-border rounded-xl p-6 hover:border-primary/30 transition-colors shadow-sm">

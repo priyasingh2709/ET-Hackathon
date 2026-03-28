@@ -5,12 +5,12 @@ import { ThemeContext } from '../context/ThemeContext';
 
 export default function Landing() {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  
+
   const features = [
     {
       icon: <Layers className="w-5 h-5 text-primary" />,
       title: "Multi-Source Briefings",
-      description: "We combine 8+ articles on a topic into one crisp, intelligent summary — saving you hours of reading."
+      description: "We combine 10K+ articles on a topic into one crisp, intelligent summary — saving you hours of reading."
     },
     {
       icon: <Target className="w-5 h-5 text-primary" />,
@@ -70,7 +70,7 @@ export default function Landing() {
             </div>
             <span className="font-bold text-xl tracking-tight text-white">News Navigator</span>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-textMuted">
             <a href="#features" className="hover:text-white transition-colors">Features</a>
             <a href="#how-it-works" className="hover:text-white transition-colors">How it Works</a>
@@ -79,9 +79,9 @@ export default function Landing() {
           </div>
 
           <div className="flex items-center space-x-5 text-sm">
-            <button 
+            <button
               onClick={toggleTheme}
-              className="text-textMuted hover:text-white transition-colors" 
+              className="text-textMuted hover:text-white transition-colors"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -100,16 +100,16 @@ export default function Landing() {
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
             <span className="text-xs font-semibold tracking-wide text-textMuted uppercase">AI-Powered News Intelligence</span>
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 text-white leading-tight">
             One briefing.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
-              Not eight articles.
+              Not Tons of Articles.
             </span>
           </h1>
-          
+
           <p className="text-textMuted text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-            News Navigator turns passive reading into an active, personalized intelligence experience — tailored to your role, interests, and learning goals.
+            News Navigator turns passive reading into an active, personalized intelligence experience, tailored to your role, interests, and learning goals.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-20">
@@ -136,7 +136,7 @@ export default function Landing() {
             <div className="flex flex-col items-center">
               <Headphones className="w-6 h-6 text-primary mb-2" />
               <div className="text-2xl font-bold text-white">2K+</div>
-              <div className="text-sm text-textMuted">Audio Hours</div>
+              <div className="text-sm text-textMuted">PodCast & Audio Hours</div>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ export default function Landing() {
             <div>
               <span className="text-primary text-xs font-bold tracking-widest uppercase mb-4 block">Workflow</span>
               <h2 className="text-4xl font-serif font-bold text-white mb-8 leading-tight">From headline to<br />headway in 60s.</h2>
-              
+
               <div className="space-y-12">
                 {steps.map((step, i) => (
                   <div key={i} className="flex space-x-6">
@@ -184,7 +184,7 @@ export default function Landing() {
                 ))}
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-orange-400/20 rounded-3xl blur-2xl opacity-50"></div>
               <div className="relative bg-surface border border-surfaceHover rounded-2xl p-4 shadow-2xl overflow-hidden aspect-video flex items-center justify-center">
@@ -218,18 +218,18 @@ export default function Landing() {
               </Link>
             </div>
             <div className="w-full md:w-1/3 bg-surface border border-surfaceHover rounded-2xl p-6 shadow-xl">
-               <div className="flex items-center justify-between mb-6">
-                 <h4 className="font-bold text-white">Daily Mains Practice</h4>
-                 <span className="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded">GS-II</span>
-               </div>
-               <p className="text-xs text-textMuted mb-4 italic">"Discuss the impact of recent digital privacy regulations on administrative transparency in India..."</p>
-               <div className="h-2 w-full bg-background rounded-full overflow-hidden">
-                 <div className="h-full bg-primary w-2/3"></div>
-               </div>
-               <div className="flex justify-between mt-2 text-[10px] text-textMuted">
-                 <span>Analysis Grade: B+</span>
-                 <span>Target: GS-II Mastery</span>
-               </div>
+              <div className="flex items-center justify-between mb-6">
+                <h4 className="font-bold text-white">Daily Mains Practice</h4>
+                <span className="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded">GS-II</span>
+              </div>
+              <p className="text-xs text-textMuted mb-4 italic">"Discuss the impact of recent digital privacy regulations on administrative transparency in India..."</p>
+              <div className="h-2 w-full bg-background rounded-full overflow-hidden">
+                <div className="h-full bg-primary w-2/3"></div>
+              </div>
+              <div className="flex justify-between mt-2 text-[10px] text-textMuted">
+                <span>Analysis Grade: B+</span>
+                <span>Target: GS-II Mastery</span>
+              </div>
             </div>
           </div>
         </div>
@@ -237,11 +237,11 @@ export default function Landing() {
         {/* Pricing Section */}
         <div id="pricing" className="pt-24 pb-32">
           <div className="text-center mb-16">
-             <span className="inline-block bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Pricing</span>
-             <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Simple, transparent pricing</h2>
-             <p className="text-textMuted text-lg max-w-xl mx-auto flex items-center justify-center">
-               Powered by Stripe. <CheckCircle2 className="w-4 h-4 mx-1.5 text-green-400" /> Secure payments, instant activation.
-             </p>
+            <span className="inline-block bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Pricing</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Simple, transparent pricing</h2>
+            <p className="text-textMuted text-lg max-w-xl mx-auto flex items-center justify-center">
+              Powered by Stripe. <CheckCircle2 className="w-4 h-4 mx-1.5 text-green-400" /> Secure payments, instant activation.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -253,7 +253,7 @@ export default function Landing() {
                 <span className="text-4xl font-bold text-white">₹0</span>
                 <span className="text-textMuted ml-2">forever</span>
               </div>
-              
+
               <ul className="space-y-4 mb-10 flex-grow">
                 {['3 briefings per day', 'Basic quiz mode', 'Short summary format', 'Interest-based feed'].map((feature, i) => (
                   <li key={i} className="flex items-start">
@@ -277,10 +277,10 @@ export default function Landing() {
               <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
               <p className="text-textMuted mb-6">For serious readers & aspirants</p>
               <div className="flex items-baseline mb-8">
-                <span className="text-4xl font-bold text-white">₹299</span>
+                <span className="text-4xl font-bold text-white">₹99</span>
                 <span className="text-textMuted ml-2">/month</span>
               </div>
-              
+
               <ul className="space-y-4 mb-10 flex-grow">
                 {['Unlimited briefings', 'Audio narration (TTS)', 'UPSC deep prep mode', '60-second daily briefing', 'Spaced repetition quizzes', 'Detailed reading box', 'Priority feed updates'].map((feature, i) => (
                   <li key={i} className="flex items-start">
@@ -296,13 +296,13 @@ export default function Landing() {
           </div>
         </div>
       </div>
-      
+
       {/* Footer */}
       <footer className="bg-surface border-t border-surfaceHover py-12">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center space-x-2 mb-6">
             <div className="bg-primary/20 p-1.5 rounded-lg">
-               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             </div>
             <span className="font-bold text-white">News Navigator</span>
           </div>
