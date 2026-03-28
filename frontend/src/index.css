@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f1f5f9;
+  --color-primary: #e15e37;
+  --color-primary-hover: #c5441e;
+  --color-text-default: #1e293b;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+}
+
+.dark {
+  --color-background: #12141c;
+  --color-surface: #1f222e;
+  --color-surface-hover: #2a2e3d;
+  --color-primary: #e15e37;
+  --color-primary-hover: #c5441e;
+  --color-text-default: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-border: #334155;
+}
+
+@theme {
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surfaceHover: var(--color-surface-hover);
+  --color-primary: var(--color-primary);
+  --color-primaryHover: var(--color-primary-hover);
+  --color-textDefault: var(--color-text-default);
+  --color-textMuted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  
+  --font-sans: "Inter", "system-ui", "sans-serif";
+  --font-serif: "Merriweather", "Georgia", "serif";
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-textDefault);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background-color: rgba(225, 94, 55, 0.2);
+  color: var(--color-primary);
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-effect {
+  background: rgba(15, 17, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-textMuted);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
