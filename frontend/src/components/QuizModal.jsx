@@ -3,7 +3,7 @@ import { X, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import axios from 'axios';
 import { clsx } from 'clsx';
 
-export default function QuizModal({ article, onClose, baseUrl }) {
+export default function QuizModal({ article, onClose }) {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -15,22 +15,22 @@ export default function QuizModal({ article, onClose, baseUrl }) {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const { data } = await axios.post(`${baseUrl}/api/assistant/generate_quiz`, {
+        const { data } = await axios.post('http://localhost:8000/api/assistant/generate_quiz', {
           article_content: article.description || article.summary_raw || article.title
         });
         if (data.quiz && data.quiz.length > 0) {
           setQuestions(data.quiz);
         } else {
-          setError("Couldn't generate quiz format properly.");
+          setError("Couldn't generate Quiz format properly.");
         }
       } catch (err) {
-        setError("Error reaching the AI quiz engine.");
+        setError("Error reaching the AI Quiz Engine.");
       } finally {
         setLoading(false);
       }
     };
-    if (article && baseUrl) fetchQuiz();
-  }, [article, baseUrl]);
+    fetchQuiz();
+  }, [article]);
 
   const handleOptionClick = (idx) => {
     if (isAnswered) return;
