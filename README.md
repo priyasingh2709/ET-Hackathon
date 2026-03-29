@@ -21,50 +21,81 @@ Designed for UPSC aspirants and news enthusiasts, it provides curated briefings,
 - [x] **Direct Stripe Integration**: Frictionless upgrades.
       
 ---
-## 🏛️ System Architecture
+## 🚀 Advanced System Architecture
 
 ```mermaid
 graph TD
-    User((User))
-    
     subgraph "Frontend (React + Vite)"
-        UI[UI Components]
-        AuthC[Auth Context]
-        ThemeC[Theme Context]
-        Router[React Router]
+        UI["User Interface (Tailwind CSS)"]
+        Components["React Components (Lucide Icons)"]
+        State["State Management (Axios + Context API)"]
     end
-    
+
     subgraph "Backend (FastAPI)"
-        API[FastAPI Gateway]
-        Processor[News Enrichment Engine]
-        Assistant[Squirrel AI Assistant]
-        Payments[Stripe Payment Verifier]
+        API["FastAPI REST Endpoints"]
+        Auth["Auth Controller (Prisma)"]
+        NewsEngine["News Fetch Engine (RSS/NewsAPI/RapidAPI)"]
+        Assistant["Assistant Logic (Groq + RAG)"]
+        VectorDB["FAISS Vector Store (Semantic Search)"]
+        Payment["Stripe Integration"]
     end
-    
-    subgraph "Data & Services"
-        DB[(MongoDB)]
-        Groq[Groq Llama-3 API]
-        NAPI[NewsAPI / RSS Feeds]
-        StripeAPI[Stripe Checkout]
+
+    subgraph "Data Storage"
+        SQLite[("SQLite (Core Data - Prisma)")]
+        VectorIndex[("FAISS Index (.bin)")]
+        LocalCache[("Local JSON Cache")]
     end
+
+    subgraph "External Services"
+        Groq["Groq Cloud (LLM - Llama 3)"]
+        NewsAPI["NewsAPI.org"]
+        RSS["Standard RSS Feeds (PIB, etc.)"]
+        RapidAPI["RapidAPI (Current Affairs)"]
+        Stripe["Stripe (Subscription & Payments)"]
+    end
+
+    %% Connections
+    UI <--> State
+    State <--> API
     
-    User <--> UI
-    UI <--> Router
-    Router <--> API
-    UI <--> AuthC
-    UI <--> ThemeC
-    
-    API <--> Processor
+    API <--> Auth
+    API <--> NewsEngine
     API <--> Assistant
-    API <--> Payments
-    
-    Processor <--> Groq
-    Processor <--> NAPI
+    API <--> Payment
+
+    Auth <--> SQLite
+    NewsEngine <--> NewsAPI
+    NewsEngine <--> RSS
+    NewsEngine <--> RapidAPI
+    NewsEngine <--> SQLite
+
     Assistant <--> Groq
-    Payments <--> StripeAPI
-    
-    API <--> DB
+    Assistant <--> VectorDB
+    VectorDB <--> VectorIndex
+
+    Payment <--> Stripe
 ```
+
+### Architecture Breakdown
+
+#### 1. Frontend Layer
+- **Framework**: React.js powered by Vite for fast development and build.
+- **Styling**: Tailwind CSS with modern design tokens (Glassmorphism, Dark Mode).
+- **Communication**: Axios client with interceptors for JWT and error handling.
+
+#### 2. Backend Layer
+- **Framework**: FastAPI (Asynchronous Python) for high-performance API handling.
+- **Intelligence**: Integrated with **Groq** for high-speed LLM processing (Llama 3).
+- **Search**: FAISS (Facebook AI Similarity Search) provides **Retrieval-Augmented Generation (RAG)** capability.
+
+#### 3. Data Storage
+- **Relational Data**: Prisma ORM managing SQLite for Users, Articles, and History.
+- **Vector Data**: FAISS index storage for semantic similarity search.
+
+#### 4. External Integrations
+- **News**: Multi-source ingestion (NewsAPI, RSS, RapidAPI).
+- **Payments**: Full Stripe Checkout lifecycle integration.
+- **AI**: Groq inference for "Why It Matters" and UPSC syllabus mapping.
 
 ---
 
